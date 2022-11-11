@@ -10,11 +10,12 @@ const AddTask = () => {
   const inputAdd=(e)=>{
     e.preventDefault()
     dispatch(add(todo))
+    setTodo("")
   }
   return (
     <div>
         <form onSubmit={inputAdd}>
-        <input type="text" onChange={(e)=>setTodo(e.target.value)}/>
+        <input type="text" placeholder='Add to do...' value={todo} onChange={(e)=>setTodo(e.target.value)}/>
         <input type="submit" value="add task"/>
         </form>
     </div>

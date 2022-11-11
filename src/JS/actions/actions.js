@@ -1,4 +1,4 @@
-import { ADD_TODO, CHECK_TODO, FILTER_NOTDONE,FILTER_DONE} from "../actionsTypes/actionsTypes"
+import { ADD_TODO, CHECK_TODO,EDIT_TODO} from "../actionsTypes/actionsTypes"
 
 export const add=(newTask)=>{
     return {
@@ -17,14 +17,13 @@ export const check=(id)=>{
         payload:id
     }
 }
+export const edit=(id,newEdit)=>{
+    return {
+        type:EDIT_TODO,
+        payload:{
+            id:id,
+            description:newEdit
+        }
+    }
+}
 
-export const filter_not=()=>{
-    return {
-        type:FILTER_NOTDONE,
-    }
-}
-export const filter_done=()=>{
-    return {
-        type:FILTER_DONE,
-    }
-}

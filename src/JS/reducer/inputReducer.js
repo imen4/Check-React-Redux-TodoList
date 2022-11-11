@@ -1,10 +1,8 @@
-import { ADD_TODO,CHECK_TODO, FILTER_NOTDONE,FILTER_DONE} from "../actionsTypes/actionsTypes";
+import { ADD_TODO,CHECK_TODO,EDIT_TODO} from "../actionsTypes/actionsTypes";
 
-const initialState = {
-  todos:[],
- 
-}
-const inputReducer = (state=initialState.todos,actions) => {
+const initialState = []
+  
+const inputReducer = (state=initialState,actions) => {
   switch (actions.type) {
     case ADD_TODO:
         return [...state,actions.payload]   
@@ -14,20 +12,22 @@ const inputReducer = (state=initialState.todos,actions) => {
         if (el.id === actions.payload) {
           return {
             ...el,
-            isDone: true,
+            isDone: !el.isDone,
           };
         }
         return el;
       });
 
-      case FILTER_NOTDONE:
-        console.log(state)
-        return state.filter((item) => !item.isDone);
-
-      case FILTER_DONE:
-        console.log(state)
-        return state.filter((item) => item.isDone);
-
+      case EDIT_TODO:
+      return state.map((el) => {
+        if (el.id === actions.payload.id) {
+          return {
+            ...el,
+            description: actions.payload.description,
+          };
+        }
+        return el;
+      });
 
     default:
         return state;
